@@ -2,7 +2,6 @@ using System.Diagnostics;
 
 public class ProcessManager
 {
-
     public string Id;
     private Process process;
 
@@ -10,7 +9,6 @@ public class ProcessManager
     {
         this.Id = id;
         var baseDirectory = Directory.GetCurrentDirectory() + "/Assets/Lives/";
-    
 
         string hlsSegmentPath = Path.Combine(baseDirectory, $"{id}-%d.ts");
         string hlsPlaylistPath = Path.Combine(baseDirectory, $"{id}.m3u8");
@@ -21,7 +19,7 @@ public class ProcessManager
             {
                 FileName = "ffmpeg",
                 Arguments =
-                //aqui é onde o diabo vive
+                    //aqui é onde o diabo vive
                     $"-re -i pipe:0"
                     + $" -c:v libx264 -r 30 -g 30 -preset ultrafast -tune zerolatency -b:v 1M -pix_fmt yuv420p -c:a aac -b:a 128k "
                     + $" -f hls -hls_playlist_type event -hls_time 7 -hls_list_size 0 -hls_segment_filename {hlsSegmentPath} {hlsPlaylistPath} ",

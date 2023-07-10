@@ -19,7 +19,6 @@ app.Map(
     "/transmit",
     async context =>
     {
-        
         using var connection = _factory.CreateConnection();
         using var channel = connection.CreateModel();
 
@@ -51,9 +50,7 @@ app.Map(
 
                 memoryStream.Seek(0, SeekOrigin.Begin);
 
-                var content = JsonConvert.SerializeObject(
-                    new { Chunk = memoryStream.ToArray() }
-                );
+                var content = JsonConvert.SerializeObject(new { Chunk = memoryStream.ToArray() });
 
                 var body = Encoding.UTF8.GetBytes(content);
 

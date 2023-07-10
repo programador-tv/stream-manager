@@ -30,16 +30,14 @@ public class Worker : BackgroundService
         var consumer = new EventingBasicConsumer(channel);
 
         consumer.Received += async (sender, args) =>
-            {
-                var message = Encoding.UTF8.GetString(args.Body.ToArray());
-             
-                var chunkStruct = 
-                    JsonConvert.DeserializeObject<ChunkStruct>(message);
-                
-                SingleProcess ??= new ProcessManager("single");
-                SingleProcess.WriteToStandardInput(chunkStruct.Chunk);
-                
-            };
+        {
+            var message = Encoding.UTF8.GetString(args.Body.ToArray());
+
+            var chunkStruct = JsonConvert.DeserializeObject<ChunkStruct>(message);
+
+            SingleProcess ??= new ProcessManager("single");
+            SingleProcess.WriteToStandardInput(chunkStruct.Chunk);
+        };
 
         channel.BasicConsume(queue: "send-chunk", autoAck: true, consumer: consumer);
 
@@ -47,6 +45,5 @@ public class Worker : BackgroundService
         {
             channel.Dispose();
         };
-
     }
 }
