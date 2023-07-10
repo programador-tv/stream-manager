@@ -1,0 +1,47 @@
+version: '3.1'
+
+services:
+  manager:
+   image: manager
+   container_name: manager
+   restart: always
+   tty: true
+
+   build:
+    context: ../../
+    dockerfile: ./devops/Docker/dockerfile.aspnet
+    args:
+      - PROJECT_NAME=manager
+      - PROJECT_PATH=./Apps/Background/manager/
+      - USE_FFMPEG=TRUE
+
+
+  socket:
+   container_name: socket
+   restart: always
+   build:
+    context: ../../
+    dockerfile: ./devops/Docker/dockerfile.aspnet
+    args:
+      - PROJECT_NAME=socket
+      - PROJECT_PATH=./Apps/Web/socket
+    
+  staticfiles:
+   container_name: mediaserver
+   restart: always
+   ports:
+    - 8080:80
+   image: nginx:latest
+   volumes:
+    - ./Apps/Background/manager/Assets/Lives/:/usr/share/nginx/html/
+    - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    
+  rabbitmq:
+    image: rabbitmq:3.12-rc-management
+    restart: always
+    ports:
+    - "5672:5672"
+    - "15672:15672"
+    env_file:
+      - envs/rabbitmq.env
+      
