@@ -27,6 +27,14 @@ public class Worker : BackgroundService
         var connection = _factory.CreateConnection();
         var channel = connection.CreateModel();
 
+         channel.QueueDeclare(
+                queue: "send-chunk",
+                durable: false,
+                exclusive: false,
+                autoDelete: false,
+                arguments: null
+            );
+            
         var consumer = new EventingBasicConsumer(channel);
 
         consumer.Received += async (sender, args) =>

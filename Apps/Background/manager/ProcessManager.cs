@@ -31,11 +31,16 @@ public class ProcessManager
             },
             EnableRaisingEvents = true
         };
+        Run();
     }
 
     public void Run()
     {
         process.Start();
+        process.ErrorDataReceived += (e, data) =>{
+
+        };
+        process.BeginErrorReadLine(); 
     }
 
     public void WriteToStandardInput(byte[] input)

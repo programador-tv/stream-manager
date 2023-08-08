@@ -10,19 +10,14 @@ const chunks = []
 const reader = new FileReader();
   reader.onload = function(e) {
     const rawData = e.target.result;
-    config.socketTransmit.send(
+    config.Instance.send(
       rawData
     );
   };
 
-onmessage = function(e) {
-
-    if(!config.started && !config.Instance) {
-      config.started = true;
-      const endpointTransmit = wsurl + '/transmit';
-      config.Instance = new WebSocket(endpointTransmit);
-    }
-    
+  const endpointTransmit = wsurl + '/transmit';
+  config.Instance = new WebSocket(endpointTransmit);
+onmessage = function(e) {  
     const buffer = e.data;
     chunks.push(buffer);
     

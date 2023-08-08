@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{FAE483DB-119
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "socket", "Apps\Web\socket\socket.csproj", "{29B5A3D7-9D3A-4FD5-AED7-7888A3A6620F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "manager", "Apps\Web\manager\manager.csproj", "{711CBDEF-77D1-4CA1-94AA-1088BEEEC59B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "manager", "Apps\Background\manager\manager.csproj", "{711CBDEF-77D1-4CA1-94AA-1088BEEEC59B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
